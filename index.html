@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lemi's Arknights Tactics & Central Guide</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@400;600;700&family=Kanit:wght@300;400;600&family=Sarabun:wght@300;400;600&family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              primary: 'var(--brand-primary, #00f0ff)',
+              bg: 'var(--brand-bg, #0b0f19)',
+              card: 'var(--brand-card, #1a2333)',
+              text: 'var(--brand-text, #e2e8f0)'
+            }
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    :root {
+      --brand-primary: #00f0ff;
+      --brand-bg: #0b0f19;
+      --active-font: 'Chakra Petch', sans-serif;
+    }
+    body {
+      font-family: var(--active-font);
+      background-color: var(--brand-bg);
+      color: #e2e8f0;
+    }
+    .rhodes-border {
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      position: relative;
+    }
+    .rhodes-border::after {
+      content: '';
+      position: absolute;
+      bottom: -1px;
+      right: -1px;
+      width: 8px;
+      height: 8px;
+      background-color: var(--brand-primary);
+    }
+  </style>
+</head>
+<body class="min-h-screen flex flex-col">
+
+  <!-- TOP HEADER NAVBAR -->
+  <header class="border-b border-gray-800 bg-black/70 backdrop-blur sticky top-0 z-50">
+    <div class="max-w-7xl mx-auto px-4 h-16 flex items-center justify-between">
+      <div class="flex items-center space-x-3">
+        <div class="w-10 h-10 rounded bg-cyan-500/10 border border-cyan-400/50 flex items-center justify-center font-bold text-cyan-400 text-xl">
+          <i class="fa-solid fa-chess-board"></i>
+        </div>
+        <div>
+          <h1 id="siteTitleHeader" class="font-bold text-lg tracking-wider text-cyan-300">LEMI'S ARKNIGHTS TACTICS</h1>
+          <p class="text-xs text-gray-400 tracking-widest uppercase">PRTS Multi-Mode Strategy Hub</p>
+        </div>
+      </div>
+
+      <div class="flex items-center space-x-3">
+        <button onclick="toggleAdminModal()" class="px-3 py-1.5 rounded bg-gray-800 hover:bg-gray-700 border border-gray-700 text-xs font-semibold flex items-center gap-2 transition">
+          <i class="fa-solid fa-lock text-cyan-400"></i>
+          <span>โหมดแก้ไข (Admin)</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- MAIN CONTAINER -->
+  <main class="max-w-7xl mx-auto px-4 py-6 flex-grow w-full">
+    
+    <!-- MODE SWITCHER (IS vs STRONGHOLD PROTOCOL) -->
+    <div class="mb-6 bg-gray-900 p-2 rounded-lg border border-gray-800 flex flex-wrap gap-2 justify-between items-center">
+      <div class="flex gap-2">
+        <button onclick="switchGameMode('IS')" id="mode-IS" class="mode-btn px-4 py-2 rounded font-bold text-sm transition flex items-center gap-2 bg-cyan-500 text-black shadow-lg">
+          <i class="fa-solid fa-cube"></i> Integrated Strategies (IS)
+        </button>
+        <button onclick="switchGameMode('STRONGHOLD')" id="mode-STRONGHOLD" class="mode-btn px-4 py-2 rounded font-bold text-sm transition flex items-center gap-2 text-gray-400 hover:text-white bg-gray-800">
+          <i class="fa-solid fa-shield-halved"></i> Stronghold Protocol
+        </button>
+      </div>
+      <span class="text-xs text-gray-400 px-3 py-1 bg-black/40 rounded border border-gray-800 hidden sm:inline-block">
+        โหมดปัจจุบัน: <strong id="currentModeLabel" class="text-cyan-400">Integrated Strategies</strong>
+      </span>
+    </div>
+
+    <!-- NAVIGATION TABS -->
+    <nav class="flex space-x-2 border-b border-gray-800 mb-6 overflow-x-auto pb-2">
+      <button onclick="switchTab('overview')" id="tab-overview" class="nav-btn active px-4 py-2 rounded-t font-semibold text-sm transition flex items-center gap-2 bg-cyan-500/20 text-cyan-400 border-b-2 border-cyan-400">
+        <i class="fa-solid fa-map"></i> ภาพรวม &amp; ธีม
+      </button>
+      <button onclick="switchTab('relics')" id="tab-relics" class="nav-btn px-4 py-2 rounded-t font-semibold text-sm transition flex items-center gap-2 text-gray-400 hover:text-white">
+        <i class="fa-solid fa-gem"></i> คลังบัฟ &amp; อุปกรณ์
+      </button>
+      <button onclick="switchTab('stages')" id="tab-stages" class="nav-btn px-4 py-2 rounded-t font-semibold text-sm transition flex items-center gap-2 text-gray-400 hover:text-white">
+        <i class="fa-solid fa-crosshairs"></i> ไกด์ด่าน &amp; บอส
+      </button>
+      <button onclick="switchTab('operators')" id="tab-operators" class="nav-btn px-4 py-2 rounded-t font-semibold text-sm transition flex items-center gap-2 text-gray-400 hover:text-white">
+        <i class="fa-solid fa-users"></i> Tier List โอเปอเรเตอร์
+      </button>
+    </nav>
+
+    <!-- TAB CONTENTS -->
+    <section id="content-overview" class="space-y-6">
+      <h2 id="overviewTitle" class="text-xl font-bold border-l-4 border-cyan-400 pl-3">หัวข้อในโหมด Integrated Strategies</h2>
+      <div id="overviewList" class="grid grid-cols-1 md:grid-cols-2 gap-4"></div>
+    </section>
+
+    <section id="content-relics" class="space-y-6 hidden">
+      <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
+        <h2 id="relicsTitle" class="text-xl font-bold border-l-4 border-cyan-400 pl-3">คลัง Relics / Items</h2>
+        <input type="text" id="relicSearch" oninput="renderRelics()" placeholder="ค้นหา..." class="px-3 py-1.5 bg-gray-900 border border-gray-700 rounded text-sm w-full sm:w-64 focus:border-cyan-400 outline-none">
+      </div>
+      <div id="relicList" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4"></div>
+    </section>
+
+    <section id="content-stages" class="space-y-6 hidden">
+      <h2 class="text-xl font-bold border-l-4 border-cyan-400 pl-3">แนวทางรับมือด่าน &amp; บอส</h2>
+      <div id="stageList" class="space-y-4"></div>
+    </section>
+
+    <section id="content-operators" class="space-y-6 hidden">
+      <h2 class
