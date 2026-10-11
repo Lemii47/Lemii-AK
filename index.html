@@ -67,7 +67,7 @@
       </div>
 
       <div class="flex items-center space-x-3">
-        <button onclick="toggleAdminModal()" class="px-3 py-1.5 rounded bg-gray-800 hover:bg-gray-700 border border-gray-700 text-xs font-semibold flex items-center gap-2 transition">
+        <button type="button" onclick="toggleAdminModal()" class="px-3 py-1.5 rounded bg-gray-800 hover:bg-gray-700 border border-gray-700 text-xs font-semibold flex items-center gap-2 transition cursor-pointer">
           <i class="fa-solid fa-lock text-cyan-400"></i>
           <span>โหมดแก้ไข (Admin)</span>
         </button>
@@ -81,10 +81,10 @@
     <!-- MODE SWITCHER (IS vs STRONGHOLD PROTOCOL) -->
     <div class="mb-6 bg-gray-900 p-2 rounded-lg border border-gray-800 flex flex-wrap gap-2 justify-between items-center">
       <div class="flex gap-2">
-        <button onclick="switchGameMode('IS')" id="mode-IS" class="mode-btn px-4 py-2 rounded font-bold text-sm transition flex items-center gap-2 bg-cyan-500 text-black shadow-lg">
+        <button type="button" onclick="switchGameMode('IS')" id="mode-IS" class="mode-btn px-4 py-2 rounded font-bold text-sm transition flex items-center gap-2 bg-cyan-500 text-black shadow-lg cursor-pointer">
           <i class="fa-solid fa-cube"></i> Integrated Strategies (IS)
         </button>
-        <button onclick="switchGameMode('STRONGHOLD')" id="mode-STRONGHOLD" class="mode-btn px-4 py-2 rounded font-bold text-sm transition flex items-center gap-2 text-gray-400 hover:text-white bg-gray-800">
+        <button type="button" onclick="switchGameMode('STRONGHOLD')" id="mode-STRONGHOLD" class="mode-btn px-4 py-2 rounded font-bold text-sm transition flex items-center gap-2 text-gray-400 hover:text-white bg-gray-800 cursor-pointer">
           <i class="fa-solid fa-shield-halved"></i> Stronghold Protocol
         </button>
       </div>
@@ -95,27 +95,27 @@
 
     <!-- NAVIGATION TABS -->
     <nav class="flex space-x-2 border-b border-gray-800 mb-6 overflow-x-auto pb-2">
-      <button onclick="switchTab('overview')" id="tab-overview" class="nav-btn active px-4 py-2 rounded-t font-semibold text-sm transition flex items-center gap-2 bg-cyan-500/20 text-cyan-400 border-b-2 border-cyan-400">
+      <button type="button" onclick="switchTab('overview')" id="tab-overview" class="nav-btn active px-4 py-2 rounded-t font-semibold text-sm transition flex items-center gap-2 bg-cyan-500/20 text-cyan-400 border-b-2 border-cyan-400 cursor-pointer">
         <i class="fa-solid fa-map"></i> ภาพรวม &amp; ธีม
       </button>
-      <button onclick="switchTab('relics')" id="tab-relics" class="nav-btn px-4 py-2 rounded-t font-semibold text-sm transition flex items-center gap-2 text-gray-400 hover:text-white">
+      <button type="button" onclick="switchTab('relics')" id="tab-relics" class="nav-btn px-4 py-2 rounded-t font-semibold text-sm transition flex items-center gap-2 text-gray-400 hover:text-white cursor-pointer">
         <i class="fa-solid fa-gem"></i> คลังบัฟ &amp; อุปกรณ์
       </button>
-      <button onclick="switchTab('stages')" id="tab-stages" class="nav-btn px-4 py-2 rounded-t font-semibold text-sm transition flex items-center gap-2 text-gray-400 hover:text-white">
+      <button type="button" onclick="switchTab('stages')" id="tab-stages" class="nav-btn px-4 py-2 rounded-t font-semibold text-sm transition flex items-center gap-2 text-gray-400 hover:text-white cursor-pointer">
         <i class="fa-solid fa-crosshairs"></i> ไกด์ด่าน &amp; บอส
       </button>
-      <button onclick="switchTab('operators')" id="tab-operators" class="nav-btn px-4 py-2 rounded-t font-semibold text-sm transition flex items-center gap-2 text-gray-400 hover:text-white">
+      <button type="button" onclick="switchTab('operators')" id="tab-operators" class="nav-btn px-4 py-2 rounded-t font-semibold text-sm transition flex items-center gap-2 text-gray-400 hover:text-white cursor-pointer">
         <i class="fa-solid fa-users"></i> Tier List โอเปอเรเตอร์
       </button>
     </nav>
 
     <!-- TAB CONTENTS -->
-    <section id="content-overview" class="space-y-6">
+    <section id="content-overview" class="tab-content space-y-6">
       <h2 id="overviewTitle" class="text-xl font-bold border-l-4 border-cyan-400 pl-3">หัวข้อในโหมด Integrated Strategies</h2>
       <div id="overviewList" class="grid grid-cols-1 md:grid-cols-2 gap-4"></div>
     </section>
 
-    <section id="content-relics" class="space-y-6 hidden">
+    <section id="content-relics" class="tab-content space-y-6 hidden">
       <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
         <h2 id="relicsTitle" class="text-xl font-bold border-l-4 border-cyan-400 pl-3">คลัง Relics / Items</h2>
         <input type="text" id="relicSearch" oninput="renderRelics()" placeholder="ค้นหา..." class="px-3 py-1.5 bg-gray-900 border border-gray-700 rounded text-sm w-full sm:w-64 focus:border-cyan-400 outline-none">
@@ -123,10 +123,198 @@
       <div id="relicList" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4"></div>
     </section>
 
-    <section id="content-stages" class="space-y-6 hidden">
+    <section id="content-stages" class="tab-content space-y-6 hidden">
       <h2 class="text-xl font-bold border-l-4 border-cyan-400 pl-3">แนวทางรับมือด่าน &amp; บอส</h2>
       <div id="stageList" class="space-y-4"></div>
     </section>
 
-    <section id="content-operators" class="space-y-6 hidden">
-      <h2 class
+    <section id="content-operators" class="tab-content space-y-6 hidden">
+      <h2 class="text-xl font-bold border-l-4 border-cyan-400 pl-3">ตัวละครแนะนำสำหรับโหมดนี้</h2>
+      <div id="operatorList" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4"></div>
+    </section>
+
+  </main>
+
+  <!-- ADMIN MODAL -->
+  <div id="adminModal" class="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex items-center justify-center hidden p-4">
+    <div class="bg-gray-900 border border-cyan-500/50 rounded-lg w-full max-w-xl p-6 space-y-4">
+      <div class="flex justify-between items-center border-b border-gray-800 pb-3">
+        <h3 class="font-bold text-cyan-400"><i class="fa-solid fa-sliders"></i> Admin Control Panel</h3>
+        <button type="button" onclick="toggleAdminModal()" class="text-gray-400 hover:text-white cursor-pointer"><i class="fa-solid fa-xmark"></i></button>
+      </div>
+      
+      <div id="adminAuthSection" class="space-y-3">
+        <label class="block text-sm">ใส่รหัสผ่านเพื่อเข้าโหมดแก้ไข:</label>
+        <div class="flex gap-2">
+          <input type="password" id="adminPassInput" placeholder="รหัสทดสอบ: 1234" class="px-3 py-2 bg-black border border-gray-700 rounded w-full text-sm">
+          <button type="button" onclick="loginAdmin()" class="px-4 py-2 bg-cyan-500 text-black font-bold rounded text-sm cursor-pointer">เข้าสู่ระบบ</button>
+        </div>
+      </div>
+
+      <div id="adminControls" class="space-y-4 hidden text-sm">
+        <p class="text-emerald-400 font-semibold"><i class="fa-solid fa-circle-check"></i> เข้าสู่โหมด Admin เรียบร้อยแล้ว</p>
+        <p class="text-gray-400 text-xs">คุณสามารถแก้ไขหรือเพิ่มข้อมูลผ่านหน้าต่างแบบฟอร์ม หรือ Import/Export ไฟล์ JSON สำรองได้ตลอดเวลา</p>
+        <button type="button" onclick="exportData()" class="w-full py-2 bg-emerald-600 hover:bg-emerald-500 text-white font-bold rounded cursor-pointer">Export Backup (JSON)</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    let currentMode = 'IS'; // 'IS' or 'STRONGHOLD'
+    
+    const db = {
+      IS: {
+        label: "Integrated Strategies",
+        overview: [
+          { name: "IS1: Phantom & Crimson Solitaire", desc: "ตะลุยโรงละครวิญญาณ Manticore / Phantom" },
+          { name: "IS2: Mizuki & Caerula Arbor", desc: "ดำดิ่งสู่โลกใต้ทะเลลึก Seaborn" },
+          { name: "IS3: Expeditions in the Icefield", desc: "การเดินทางในทุ่งหิมะทางเหนือ" },
+          { name: "IS4: Tales Within the Sand", desc: "การผจญภัยกลางทะเลทรายและซากอารยธรรมโบราณ" }
+        ],
+        relics: [
+          { name: "King's Crystal", type: "Combat Buff", desc: "สโลว์ศัตรูรายรอบ 20%" },
+          { name: "Spinach Pack", type: "Combat Buff", desc: "กดใช้สกิลแล้วเพิ่ม ATK +60%" }
+        ],
+        stages: [
+          { name: "Lucian the Blood Diamond", desc: "เน้นตัวหยุดจังหวะ สปีดบอสไวมาก" }
+        ],
+        operators: [
+          { name: "Texas the Omertosa", class: "Specialist", tier: "S+" }
+        ]
+      },
+      STRONGHOLD: {
+        label: "Stronghold Protocol",
+        overview: [
+          { name: "ระบบป้องกันพื้นที่ Stronghold Zone", desc: "จัดกำลังวางแนวตั้งรับคลื่นศัตรูตามเฟสที่กำหนด" },
+          { name: "การจัดสรร Tactics Modules & Buffs", desc: "เลือกบัฟประจำทีมเพื่อเสริมความแข็งแกร่งให้สายอาชีพหลัก" }
+        ],
+        relics: [
+          { name: "Reinforced Module A", type: "Tactics Module", desc: "เพิ่ม DEF ให้กลุ่ม Defender และ Guard ขึ้น 25%" },
+          { name: "Energy Converter", type: "Tactics Module", desc: "เร่งการฟื้นฟู DP ขึ้น 1.5 เท่าในขณะตั้งรับ" }
+        ],
+        stages: [
+          { name: "Stronghold Protocol: Sector 3", desc: "เตรียมตัวรับมือศัตรูประเภทเกราะหนาหนักระลอกใหญ่" }
+        ],
+        operators: [
+          { name: "Mlynar", class: "Guard", tier: "S+" },
+          { name: "Saria", class: "Defender", tier: "S+" },
+          { name: "Chongyue", class: "Guard", tier: "S" }
+        ]
+      }
+    };
+
+    window.addEventListener('DOMContentLoaded', () => {
+      renderAll();
+    });
+
+    function switchGameMode(mode) {
+      currentMode = mode;
+      document.querySelectorAll('.mode-btn').forEach(b => {
+        b.classList.remove('bg-cyan-500', 'text-black', 'shadow-lg');
+        b.classList.add('text-gray-400', 'bg-gray-800');
+      });
+      const activeBtn = document.getElementById(`mode-${mode}`);
+      if (activeBtn) {
+        activeBtn.classList.remove('text-gray-400', 'bg-gray-800');
+        activeBtn.classList.add('bg-cyan-500', 'text-black', 'shadow-lg');
+      }
+
+      document.getElementById('currentModeLabel').innerText = db[mode].label;
+      renderAll();
+    }
+
+    function renderAll() {
+      const data = db[currentMode];
+      
+      // Render Overview
+      document.getElementById('overviewTitle').innerText = `หัวข้อในโหมด ${data.label}`;
+      document.getElementById('overviewList').innerHTML = data.overview.map(item => `
+        <div class="bg-gray-900 border border-gray-800 p-4 rounded rhodes-border">
+          <h3 class="font-bold text-cyan-300">${item.name}</h3>
+          <p class="text-sm text-gray-400 mt-1">${item.desc}</p>
+        </div>
+      `).join('');
+
+      // Render Relics / Buffs
+      renderRelics();
+
+      // Render Stages
+      document.getElementById('stageList').innerHTML = data.stages.map(s => `
+        <div class="bg-gray-900 border border-gray-800 p-4 rounded">
+          <h4 class="font-bold text-red-400">${s.name}</h4>
+          <p class="text-sm text-gray-300 mt-1">${s.desc}</p>
+        </div>
+      `).join('');
+
+      // Render Operators
+      document.getElementById('operatorList').innerHTML = data.operators.map(o => `
+        <div class="bg-gray-900 border border-gray-800 p-4 rounded flex justify-between items-center">
+          <div>
+            <h4 class="font-bold">${o.name} <span class="text-xs text-gray-400">(${o.class})</span></h4>
+          </div>
+          <span class="text-sm font-bold text-cyan-400 bg-cyan-950 px-2 py-1 rounded border border-cyan-800">${o.tier}</span>
+        </div>
+      `).join('');
+    }
+
+    function renderRelics() {
+      const search = document.getElementById('relicSearch')?.value.toLowerCase() || '';
+      const list = db[currentMode].relics.filter(r => r.name.toLowerCase().includes(search) || r.desc.toLowerCase().includes(search));
+      
+      document.getElementById('relicList').innerHTML = list.map(r => `
+        <div class="bg-gray-900 border border-gray-800 p-4 rounded rhodes-border">
+          <div class="flex justify-between items-center mb-1">
+            <h4 class="font-bold text-amber-300">${r.name}</h4>
+            <span class="text-xs text-gray-500">${r.type}</span>
+          </div>
+          <p class="text-xs text-gray-300">${r.desc}</p>
+        </div>
+      `).join('');
+    }
+
+    function switchTab(tabId) {
+      document.querySelectorAll('.nav-btn').forEach(btn => {
+        btn.classList.remove('active', 'bg-cyan-500/20', 'text-cyan-400', 'border-b-2', 'border-cyan-400');
+        btn.classList.add('text-gray-400');
+      });
+      document.querySelectorAll('.tab-content').forEach(sec => sec.classList.add('hidden'));
+      
+      const activeBtn = document.getElementById(`tab-${tabId}`);
+      if (activeBtn) {
+        activeBtn.classList.remove('text-gray-400');
+        activeBtn.classList.add('active', 'bg-cyan-500/20', 'text-cyan-400', 'border-b-2', 'border-cyan-400');
+      }
+      
+      const activeContent = document.getElementById(`content-${tabId}`);
+      if (activeContent) {
+        activeContent.classList.remove('hidden');
+      }
+    }
+
+    function toggleAdminModal() {
+      const modal = document.getElementById('adminModal');
+      modal.classList.toggle('hidden');
+    }
+
+    function loginAdmin() {
+      const pass = document.getElementById('adminPassInput').value;
+      if (pass === '1234') {
+        document.getElementById('adminAuthSection').classList.add('hidden');
+        document.getElementById('adminControls').classList.remove('hidden');
+      } else {
+        alert("รหัสผ่านไม่ถูกต้อง (ใชรหัส: 1234)");
+      }
+    }
+
+    function exportData() {
+      const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(db, null, 2));
+      const downloadAnchor = document.createElement('a');
+      downloadAnchor.setAttribute("href", dataStr);
+      downloadAnchor.setAttribute("download", "lemi_ak_guides.json");
+      document.body.appendChild(downloadAnchor);
+      downloadAnchor.click();
+      downloadAnchor.remove();
+    }
+  </script>
+</body>
+</html>
